@@ -1,0 +1,33 @@
+<div class="container card">
+    <h1>Tabla de Productos</h1>
+    <input type="text" [(ngModel)]="filterString" (ngModelChange)="filterOrders()" placeholder="Buscar...">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Número de pedido</th>
+                <th scope="col">Importe</th>
+                <th scope="col">Importe impuestos</th>
+                <th scope="col">Cantidad productos</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (pedido of paginatedOrders(); track pedido._id) {
+            <tr>
+                <td>{{pedido.numero_pedido}}</td>
+                <td>{{pedido.importe}} €</td>
+                <td>{{pedido.importe_impuestos}} €</td>
+                <td>{{pedido.cantidad_productos}}</td>
+                <td>{{pedido.fecha | date:'dd-MM-YY'}}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pageButtons">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{currentPage}} de {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+    </div>
+
+</div>
