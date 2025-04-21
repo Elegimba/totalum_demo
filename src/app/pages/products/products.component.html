@@ -11,13 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            <!-- @for () -->
-             <tr>
-                <td>manzana</td>
-                <td>0.50 €</td>
-                <td>Frutas</td>
-                <td>10</td>
-             </tr>
+            @for (producto of arrProductos; track producto._id) {
+                <tr>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.precio}}</td>
+                    <td>{{producto.categoria}}</td>
+                    <td>{{producto.cantidad}}</td>
+                </tr>
+            }
         </tbody>
     </table>
     

@@ -10,8 +10,10 @@ import { environment } from '../../environments/environment';
 export class ProductsService {
 
   private httpClient = inject(HttpClient);
-  private baseUrl = `${environment.apiUrl}`
+  private baseUrl = `${environment.apiUrl}/products`
 
+
+  //Intentos sin backend
   /* getAll(): Promise<ProductoI[]> {
     const url = 'https://api.totalum.app/api/v1/crud/producto';
 
@@ -35,13 +37,21 @@ export class ProductsService {
       .then(res => res.items as ProductoI[]);
   } */
 
-  getAll(): Observable<any[]> {
+  /* getAll(): Observable<any[]> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer sk-eyJrZXkiOiIxMDFkY2I3ZjkwNTdiMWVhYzE5YTZkNTgiLCJuYW1lIjoiRGVmYXVsdCBBUEkgS2V5IGF1dG9nZW5lcmF0ZWQgMDNwYiIsIm9yZ2FuaXphdGlvbklkIjoiaWFnby1wcnVlYmEtdGVjbmljYSJ9'
     });
 
     return this.httpClient.get<any[]>(this.baseUrl, { headers });
-  }
+  } */
 
+
+  //Petición a mi propio backend
+  getAll(): Promise<ProductoI[]> {
+    return lastValueFrom(
+      this.httpClient.get<ProductoI[]>
+      (this.baseUrl)
+    )
+  }
 
 }
