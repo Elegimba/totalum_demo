@@ -18,6 +18,9 @@ export class ProductsComponent {
   filterString: string = '';
   arrFilterProducts = [...this.arrProducts]
 
+  currentPage = 1;
+  elementsPerPage = 5;
+
 
   //Intento sin backend
   /* ngOnInit(): void {
@@ -32,7 +35,8 @@ export class ProductsComponent {
   async ngOnInit() {
     try {
       this.arrProducts = await this.productsService.getAll();
-      console.log(this.arrProducts)
+      this.arrFilterProducts = [...this.arrProducts];
+      /* console.log(this.arrProducts) */
     } catch (error) {
       console.error(error);
     }
@@ -44,9 +48,32 @@ export class ProductsComponent {
     const search = this.filterString.trim().toLowerCase();
 
     this.arrFilterProducts = this.arrProducts.filter(producto => producto.nombre?.toLowerCase().includes(search));
+    this.currentPage = 1;
   }
 
 
-  
+  //Paginación
+  get totalPages(): number {
+    return Math.ceil(this.arrFilterProducts.length / this.elementsPerPage);
+  }
+
+  paginatedProducts() {
+    const start = (this.currentPage - 1) * this.elementsPerPage;
+    const end = start + this.elementsPerPage;
+    return this.arrFilterProducts.slice(start, end);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
 
 }

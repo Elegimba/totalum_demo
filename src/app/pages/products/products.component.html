@@ -11,26 +11,21 @@
             </tr>
         </thead>
         <tbody>
-            @if (filterString === '') {
-                @for (producto of arrProducts; track producto._id) {
-                <tr>
-                    <td>{{producto.nombre}}</td>
-                    <td>{{producto.precio}}</td>
-                    <td>{{producto.categoria}}</td>
-                    <td>{{producto.cantidad}}</td>
-                </tr>
-                }
-            } @else {
-                @for (producto of arrFilterProducts; track producto._id) {
-                    <tr>
-                        <td>{{producto.nombre}}</td>
-                        <td>{{producto.precio}}</td>
-                        <td>{{producto.categoria}}</td>
-                        <td>{{producto.cantidad}}</td>
-                    </tr>
-                }
+            @for (producto of paginatedProducts(); track producto._id) {
+            <tr>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.precio}}</td>
+                <td>{{producto.categoria}}</td>
+                <td>{{producto.cantidad}}</td>
+            </tr>
             }
         </tbody>
     </table>
-    
+
+    <div class="pageButtons">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{currentPage}} de {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+    </div>
+
 </div>
