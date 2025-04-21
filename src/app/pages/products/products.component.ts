@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductsComponent {
 
-  arrProductos: ProductoI[] = [];
+  arrProducts: ProductoI[] = [];
   
   productsService = inject(ProductsService);
 
-  filtroNombre: string = '';
+  filterString: string = '';
+  arrFilterProducts = [...this.arrProducts]
 
 
   //Intento sin backend
@@ -30,19 +31,22 @@ export class ProductsComponent {
   //Con mi backend
   async ngOnInit() {
     try {
-      this.arrProductos = await this.productsService.getAll();
-      console.log(this.arrProductos)
+      this.arrProducts = await this.productsService.getAll();
+      console.log(this.arrProducts)
     } catch (error) {
       console.error(error);
     }
   } 
 
 
-  productFilter() {
-    if (!this.filtroNombre) {
-      return this.arrProductos;
-    }
-    return this.arrProductos.filter(producto => producto.nombre?.toLowerCase().includes(this.filtroNombre.toLowerCase()));
+  //Funcion para el buscador
+  filterProducts() {
+    const search = this.filterString.trim().toLowerCase();
+
+    this.arrFilterProducts = this.arrProducts.filter(producto => producto.nombre?.toLowerCase().includes(search));
   }
+
+
+  
 
 }

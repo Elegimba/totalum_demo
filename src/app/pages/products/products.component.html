@@ -1,6 +1,6 @@
 <div class="container card">
     <h1>Tabla de Productos</h1>
-    <input type="text">
+    <input type="text" [(ngModel)]="filterString" (ngModelChange)="filterProducts()" placeholder="Buscar...">
     <table class="table">
         <thead>
             <tr>
@@ -11,13 +11,24 @@
             </tr>
         </thead>
         <tbody>
-            @for (producto of arrProductos; track producto._id) {
+            @if (filterString === '') {
+                @for (producto of arrProducts; track producto._id) {
                 <tr>
                     <td>{{producto.nombre}}</td>
                     <td>{{producto.precio}}</td>
                     <td>{{producto.categoria}}</td>
                     <td>{{producto.cantidad}}</td>
                 </tr>
+                }
+            } @else {
+                @for (producto of arrFilterProducts; track producto._id) {
+                    <tr>
+                        <td>{{producto.nombre}}</td>
+                        <td>{{producto.precio}}</td>
+                        <td>{{producto.categoria}}</td>
+                        <td>{{producto.cantidad}}</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
