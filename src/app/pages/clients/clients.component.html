@@ -1,6 +1,6 @@
 <div class="container card">
-    <h1>Tabla de Productos</h1>
-    <input type="text" [(ngModel)]="filterString" (ngModelChange)="filterClients()" placeholder="Buscar...">
+    <h1>Tabla de clientes</h1>
+    <input type="text" class="form-control" [(ngModel)]="filterString" (ngModelChange)="filterClients()" placeholder="Buscar...">
     <table class="table">
         <thead>
             <tr>
@@ -21,9 +21,9 @@
     </table>
 
     <div class="pageButtons">
-        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <button class="btn btn-primary" (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
         <span>Página {{currentPage}} de {{totalPages}}</span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
     </div>
 
 </div>

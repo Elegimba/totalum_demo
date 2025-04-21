@@ -1,0 +1,15 @@
+.container {
+    margin-top: 1.875rem;
+    box-shadow: 0.0625rem 0.0625rem 0.3125rem 0.0625rem;
+    overflow: auto;
+}
+
+input {
+    border: 0.15625rem solid rgba(0, 138, 202, 0.589);
+}
+
+.pageButtons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0.625rem;
+}

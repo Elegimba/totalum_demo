@@ -28,7 +28,7 @@ export class OrdersComponent {
     try {
       this.arrOrders = await this.ordersService.getAll();
       this.arrFliterOrders = [...this.arrOrders];
-      console.log(this.arrOrders)
+      /* console.log(this.arrOrders) */
     } catch (error) {
       console.error(error);
     }
